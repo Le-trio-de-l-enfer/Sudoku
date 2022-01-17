@@ -2,7 +2,7 @@
 #include "Sudoku.h"
 
 int main() {
-    sudoku::Sudoku s1(1, 9);
+    sudoku::Sudoku s1(5, 9);
     std::cout << s1 << std::endl;
     std::cout << '\n';
 

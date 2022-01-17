@@ -9,52 +9,39 @@ namespace sudoku {
 
     Sudoku::Sudoku(int lvl, int size) : _lvl(lvl), _size(size) {
         _grille = std::vector< std::vector<int> > (_row, std::vector<int> (_column, 0)); //rempli un double tableau de 9*9 de 0
-        this->resolve();
-        std::cout << _grille << '\n';
-        std::srand(std::time(nullptr));
-        this->generateGrid(this->getDifficulty());
+        std::srand(time(nullptr));
+        this->generateGrid2(60);
+        //std::cout << _grille << '\n';
+        //this->resolve();
+        //this->generateGrid(this->getDifficulty());
+
     }
 
-    /*void Sudoku::generateGrid() {
 
-        std::srand(std::time(nullptr));
-
-        for(int i = 0; i < _row; i++) {
-            for(int j = 0; j < _column; j++) {
-                int temp = std::rand()%9+1;
-
-                if (isValid(temp, i, j)){
-
-                    _grille[i][j] = temp;
-                  }
-            }
-        }
-
-    }*/
-
-    void Sudoku::generateGrid2(int reste) {
-        int row = std::rand()%9;
-        int col = std::rand()%9;
-
+  void Sudoku::generateGrid2(int reste) {
         int N = reste;
-
         if (N > 0) {
-          if (_grille[row][col] != 0) {
-              _grille[row][col] = 0;
-              N--;
+          int row = std::rand()%9;
+          int col = std::rand()%9;
+          int num = std::rand()%9+1;
+          //std::cout << num << '\n';
+          if (_grille[row][col] == 0) {
+            if (isValid(num, row, col)) {
+                _grille[row][col] = num;
+                N--;
+            }
           }
-          this->generateGrid(N);
+          this->generateGrid2(N);
         }
+
     }
 
 
     void Sudoku::generateGrid(int reste) {
-        int row = std::rand()%9;
-        int col = std::rand()%9;
-
         int N = reste;
-
         if (N > 0) {
+          int row = std::rand()%9;
+          int col = std::rand()%9;
           if (_grille[row][col] != 0) {
               _grille[row][col] = 0;
               N--;
@@ -90,7 +77,7 @@ namespace sudoku {
     }
 
     bool Sudoku::resolve() {
-        std::srand(std::time(nullptr));
+        std::srand(time(nullptr));
         int row, col;
 
         if (!isEmpty(row, col)) {
@@ -103,6 +90,7 @@ namespace sudoku {
         std::shuffle(v.begin(), v.end(), std::mt19937(std::random_device()()));
 
         for(int & num : v){
+        //for (size_t num = 0; num < _size; num++) {
             if (isValid(num, row, col)) {
                 _grille[row][col] = num;
                 if (resolve()) {
@@ -116,7 +104,8 @@ namespace sudoku {
 
 
     bool Sudoku::isValid(int n, int x, int y) {
-           return isPlaceable_row(n, x) && isPlaceable_column(n, y) && isPlaceable_square(n, x - x%3 ,y - y%3);
+
+           return isPlaceable_row(n, x) && isPlaceable_column(n, y) && isPlaceable_square(n, x - (x%3) ,y - (y%3)) && _grille[x][y] == 0;
     }
 
     bool Sudoku::isEmpty(int &row, int &col) {
@@ -132,26 +121,19 @@ namespace sudoku {
 
 
     bool Sudoku::isPlaceable_row(int n, int y) {
-        /*std::vector<int> temp = _grille.at(y);
-        auto it = std::find(temp.begin(), temp.end(), n);
-        bool ret = false;
-
-        if (it != temp.end()) {
-            ret = true;
-        }*/
-        bool ret = true;
+        bool res = true;
         for (int col = 0; col < _row; col++) {
-            if (_grille[y][col] == n) ret = false;
+            if (_grille[y][col] == n) res = false;
         }
-        return ret;
+        return res;
     }
 
     bool Sudoku::isPlaceable_column(int n, int x) {
-        bool ret = true;
+        bool res = true;
         for (int row = 0; row < _column; row++){
-            if (_grille[row][x] == n) ret = false;
+            if (_grille[row][x] == n) res = false;
         }
-        return ret;
+        return res;
     }
 
     bool Sudoku::isPlaceable_square(int n, int x, int y) {

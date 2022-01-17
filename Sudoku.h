@@ -18,6 +18,7 @@ namespace sudoku {
         std::vector< std::vector<int> > _grille;
 
         void generateGrid(int reste);
+        void generateGrid2(int reste);
         bool isPlaceable_row(int, int);
         bool isPlaceable_column(int, int);
         bool isPlaceable_square(int, int, int);

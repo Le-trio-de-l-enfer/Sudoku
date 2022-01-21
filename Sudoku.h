@@ -12,8 +12,6 @@ namespace sudoku {
     //Declaration des variables
     private:
         int _lvl = 0;
-        int _row = 9;
-        int _column = 9;
         int _size = 9;
         std::vector< std::vector<int> > _grille;
 
@@ -30,11 +28,14 @@ namespace sudoku {
         Sudoku(int lvl, int size);
         bool resolve();
         std::vector< std::vector<int> > getGrille() { return _grille ;};
+        int getSize() { return _size ;};
+
 
   };
 
       std::ostream& operator<<(std::ostream& os, Sudoku& sudoku);
       std::ostream& operator<<(std::ostream& os, std::vector< std::vector<int> >& sudoku);
+
 
 }
 

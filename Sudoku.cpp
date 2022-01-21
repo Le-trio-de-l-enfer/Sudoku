@@ -3,13 +3,14 @@
 #include <fstream>
 #include <algorithm>
 #include <random>
+#include <ctime>
 
 namespace sudoku {
 
 
     Sudoku::Sudoku(int lvl, int size) : _lvl(lvl), _size(size) {
-        _grille = std::vector< std::vector<int> > (_row, std::vector<int> (_column, 0)); //rempli un double tableau de 9*9 de 0
-        std::srand(time(nullptr));
+        _grille = std::vector< std::vector<int> > (_size, std::vector<int> (_size, 0)); //rempli un double tableau de size*size de 0
+        std::srand(std::time(nullptr));
         //this->generateGrid2(40, 40);
         this->resolve();
         this->generateGrid(this->getDifficulty());
@@ -20,9 +21,9 @@ namespace sudoku {
   void Sudoku::generateGrid2(int reste, int total) {
         int N = reste;
         if (N > 0) {
-          int row = std::rand()%9;
-          int col = std::rand()%9;
-          int num = std::rand()%9+1;
+          int row = std::rand()%_size;
+          int col = std::rand()%_size;
+          int num = std::rand()%(_size+1);
           //std::cout << num << '\n';
           if (_grille[row][col] == 0) {
             if (isValid(num, row, col)) {
@@ -39,8 +40,8 @@ namespace sudoku {
     void Sudoku::generateGrid(int reste) {
         int N = reste;
         if (N > 0) {
-          int row = std::rand()%9;
-          int col = std::rand()%9;
+          int row = std::rand()%_size;
+          int col = std::rand()%_size;
           if (_grille[row][col] != 0) {
               _grille[row][col] = 0;
               N--;
@@ -76,7 +77,6 @@ namespace sudoku {
     }
 
     bool Sudoku::resolve() {
-        std::srand(time(nullptr));
         int row, col;
 
         if (!isEmpty(row, col)) {
@@ -84,7 +84,7 @@ namespace sudoku {
         }
 
         std::vector<int> v;
-        for (size_t i = 1; i < 10; i++) v.push_back(i);
+        for (size_t i = 1; i < _size+1; i++) v.push_back(i);
 
         std::shuffle(v.begin(), v.end(), std::mt19937(std::random_device()()));
 
@@ -98,6 +98,7 @@ namespace sudoku {
                 _grille[row][col] = 0;
             }
         }
+        ///std::cout << _grille << '\n';
         return false;
     };
 
@@ -111,8 +112,8 @@ namespace sudoku {
     }
 
     bool Sudoku::isEmpty(int &row, int &col) {
-        for (row = 0; row < _row; row++) {
-            for (col = 0; col < _column; col++) {
+        for (row = 0; row < _size; row++) {
+            for (col = 0; col < _size; col++) {
                 if (_grille[row][col] == 0) {
                     return true;
                 }
@@ -124,7 +125,7 @@ namespace sudoku {
 
     bool Sudoku::isPlaceable_row(int n, int x) {
         bool res = true;
-        for (int row = 0; row < _row; row++) {
+        for (int row = 0; row < _size; row++) {
             if (_grille[x][row] == n) res = false;
         }
         return res;
@@ -132,61 +133,62 @@ namespace sudoku {
 
     bool Sudoku::isPlaceable_column(int n, int y) {
         bool res = true;
-        for (int col = 0; col < _column; col++){
+        for (int col = 0; col < _size; col++){
             if (_grille[col][y] == n) res = false;
         }
         return res;
     }
 
     bool Sudoku::isPlaceable_square(int n, int x, int y) {
-        std::cout << _grille << '\n';
-        std::cout << "/* message */" << '\n';
-        std::cout << x << '\n';
-        std::cout << y << '\n';
-        std::cout << "/* message */" << '\n';
+        //std::cout << _grille << '\n';
+        //std::cout << "/* message */" << '\n';
+        //std::cout << x << '\n';
+        //std::cout << y << '\n';
+        //std::cout << "/* message */" << '\n';
         bool res = true;
-        int _x = x - x%3;
-        int _y = y - y%3;
-        for (int row = _x; row < _x+3; row++) {
-          for (int col = _y; col < _y+3; col++) {
-            std::cout << n << '\n';
-            std::cout << row << '\n';
-            std::cout << col << '\n';
-            std::cout << '\n';
+        int _x = x - x%((int)sqrt(_size));
+        int _y = y - y%((int)sqrt(_size));
+        for (int row = _x; row < _x+((int)sqrt(_size)); row++) {
+          for (int col = _y; col < _y+((int)sqrt(_size)); col++) {
+            //std::cout << n << '\n';
+            //std::cout << row << '\n';
+            //std::cout << col << '\n';
+            //std::cout << '\n';
 
             if (_grille[row][col] == n){
-              std::cout << "---------------------------" << '\n';
+              //std::cout << "---------------------------" << '\n';
                return false;
             }
           }
         }
-        std::cout << "Next" << '\n';
-        std::cout << '\n';
+        //std::cout << "Next" << '\n';
+        //std::cout << '\n';
 
         return true;
     }
 
     std::ostream& operator<<(std::ostream& os, Sudoku& sudoku) {
         auto g = sudoku.getGrille();
-        for (size_t i = 0; i < 9; i++)
+        for (size_t i = 0; i < sudoku.getSize(); i++)
         {
-            if (i%3 == 0 && i != 0) {
-                for (size_t n = 0; n < 16; n++)
+            if (i%((int)sqrt(sudoku.getSize())) == 0 && i != 0) {
+                for (size_t n = 0; n < sudoku.getSize()+sudoku.getSize()-2; n++)
                 {
                     os << "__";
                 }
                 os << std::endl;
                 os << std::endl;
             }
-            for (size_t j = 0; j < 9; j++)
+            for (size_t j = 0; j < sudoku.getSize(); j++)
             {
-                if (!(j%3) && j != 0) {
+                if (!(j%((int)sqrt(sudoku.getSize()))) && j != 0) {
                     os << " | ";
                 }
 
                 os << " ";
                 if (g.at(i).at(j) == 0) {
                     os << "\x1B[91m0\033[0m";
+                    //os << "0";
                 } else {
                     os << g.at(i).at(j);
                 }
@@ -201,21 +203,34 @@ namespace sudoku {
         return os;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     std::ostream& operator<<(std::ostream& os, std::vector< std::vector<int> >& sudoku) {
         auto g = sudoku;
-        for (size_t i = 0; i < 9; i++)
+        for (size_t i = 0; i < 25; i++)
         {
-            if (i%3 == 0 && i != 0) {
-                for (size_t n = 0; n < 16; n++)
+            if (i%((int)sqrt(25)) == 0 && i != 0) {
+                for (size_t n = 0; n < 100; n++)
                 {
                     os << "__";
                 }
                 os << std::endl;
                 os << std::endl;
             }
-            for (size_t j = 0; j < 9; j++)
+            for (size_t j = 0; j < 25; j++)
             {
-                if (!(j%3) && j != 0) {
+                if (!(j%((int)sqrt(25))) && j != 0) {
                     os << " | ";
                 }
 

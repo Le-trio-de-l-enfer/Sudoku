@@ -26,7 +26,7 @@ namespace sudoku {
 
     public:
         Sudoku(int lvl, int size);
-        bool resolve();
+        bool resolve(int position);
         std::vector< std::vector<int> > getGrille() { return _grille ;};
         int getSize() { return _size ;};
 

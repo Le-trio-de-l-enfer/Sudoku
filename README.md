@@ -9,7 +9,7 @@
 Sujet propose par M. Ginhac (https://github.com/dginhac)
 
 ## Introdution
-Nous avons de décider de commencer pour notre premier TP par l'un des TP les plus complexes. Nous avions tout deux déja programmer suite à notre DUT Informatique avant d'intégrer l'ESIREM. Durant notre cursus, nos différent cours nous ont appris le dévelopements orientés objet ainsi que différent langage de programmation dont le C++. Nous avons déja réaliser des projets de dévellopements ensemble et nous avons donc créer un repo Github dès le début. 
+Ce TP a pour but de generer des grilles de Sudoku de taille N avec 5 niveaux de difficultes. A l'aide d'un algorithme de "backtracking", nous devons resoudre ces differentes grilles de sudoku. Nous avons plutot bien apprecie le premier TP que nous avons realiser et nous aimons realiser des defis, c'est pour cela que pour notre 2e TP, nous avons choisit le plus complexe. 
 
 
 ## Deroulement du TP

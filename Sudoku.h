@@ -24,7 +24,7 @@ namespace sudoku {
     public:
         Sudoku(int lvl, int size); //Constructeur en partant d'une grille vide
         Sudoku(std::vector< std::vector<int> > grille); //Constructeur en donnant une grille en parametre
-        bool resolve(int position); //Permet de resoudre la grille
+        bool resolve(int position, int&); //Permet de resoudre la grille
         void setSoluce(); //Permet de remplacer la grille a trou par la correction
 
         //Getters

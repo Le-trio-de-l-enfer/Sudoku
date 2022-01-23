@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <random>
 #include <ctime>
+#include <chrono>
+
 
 namespace sudoku {
 
@@ -12,7 +14,16 @@ namespace sudoku {
         _grille = std::vector< std::vector<int> > (_size, std::vector<int> (_size, 0)); //rempli un double tableau de size*size de 0
         std::srand(std::time(nullptr));
         //this->generateGrid2(550,300);
-        this->resolve(0);
+        int it = 0;
+        int& pit = it; //Nombre d'iterations de la fonction resolve
+        auto start = std::chrono::high_resolution_clock::now();//Permet de connaitre le temps d'execution de la fonction recursive resolve
+        this->resolve(0, pit);
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+        std::cout << "Nombre d'iterations : " << pit << '\n';
+        std::cout << '\n';
+        std::cout << "Temps d'executions : " << duration.count() << '\n';
+        std::cout << '\n';
         this->_grilleSoluce = _grille;
         this->generateGrid(this->getDifficulty());
 
@@ -86,11 +97,12 @@ namespace sudoku {
     }
 
     //Permet de resoudre la grille
-    bool Sudoku::resolve(int position) {
+    bool Sudoku::resolve(int position, int& pit) {
+        pit++;
         if (position == _size*_size) return true;
         int row = position/_size, col = position%_size;
 
-        if (!isEmpty(row, col)) return resolve(position+1);
+        if (!isEmpty(row, col)) return resolve(position+1, pit);
         std::vector<int> v;
         for (size_t i = 1; i < _size+1; i++) v.push_back(i);
 
@@ -100,7 +112,7 @@ namespace sudoku {
             if (isValid(num, row, col)) {
                 _grille[row][col] = num;
 
-                if (resolve(position+1)) return true;
+                if (resolve(position+1, pit)) return true;
                 _grille[row][col] = 0;
             }
         }

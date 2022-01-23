@@ -45,6 +45,7 @@ Comparer aux grilles 9*9, le nombre d'itérations et le temps nécessaires sont 
 
 ### Grille 25*25
 Nombres d'itérations pour une grille 25*25 : 5616267
+
 Temps d'executions (en ms) : 169760379
 
 ## Rendu final

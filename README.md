@@ -22,6 +22,28 @@ Pour ce projet, nous avons commencé par lister l'ensemble des tâches à réali
   - Pour générer une grille, nous devons d'abord résoudre une grille vide, puis enlever un certain nombre de cases suivant la difficulté demandé.
   - Pour la génération des grilles supérieures à 25*25 cases, le temps de résolution de la grille vide prend un temps exponentiel suivant le nombre de case et peut prendre plusieurs minutes. Cela vient sans doute de notre façon d'avoir implementer l'algorithme.
 
+## Exploitation des résultats
+### Grille 9*9
+Nombres d'itérations pour une grille 9*9 : 112 - 129 - 127 - 86 - 217
+On observe une moyenne d'itérations vers les 120 pour resoudre une grille vierge de sudoku 9*9.
+Temps d'executions (en ms) : 2888 - 3609 - 4015 - 2969 - 7351
+
+Le temps observé est environ proportionnel au nombre d'itérations nécessaires.
+
+Le nombre d'itérations nécessaires étant en moyenne faible, le temps d'exécution est assez rapide.
+
+
+### Grille 16*16
+Nombres d'itérations pour une grille 16*16 : 5992 - 1108 - 1786 - 4304 - 2691
+On observe une moyenne d'itérations vers les 120 pour resoudre une grille vierge de sudoku 9*9.
+Temps d'executions (en ms) : 159566 - 33083 - 49389 - 113593 - 81608
+
+Le temps observé est environ proportionnel au nombre d'itérations nécessaires.
+
+Le nombre d'itérations nécéssaires étant en moyenne faible, le temps d'exécution est assez rapide.
+
+Comparer aux grilles 9*9, le nombre d'itérations et le temps nécessaires sont exponentiels. On en déduit une compléxité O(N^(n*n)) avec N la taille de la grille.
+
 
 ## Rendu final
 ### Rendu d'un sudoku 9*9

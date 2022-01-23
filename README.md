@@ -25,7 +25,9 @@ Pour ce projet, nous avons commencé par lister l'ensemble des tâches à réali
 ## Exploitation des résultats
 ### Grille 9*9
 Nombres d'itérations pour une grille 9*9 : 112 - 129 - 127 - 86 - 217
+
 On observe une moyenne d'itérations vers les 120 pour resoudre une grille vierge de sudoku 9*9.
+
 Temps d'executions (en ms) : 2888 - 3609 - 4015 - 2969 - 7351
 
 Le temps observé est environ proportionnel au nombre d'itérations nécessaires.
@@ -35,6 +37,7 @@ Le nombre d'itérations nécessaires étant en moyenne faible, le temps d'exécu
 
 ### Grille 16*16
 Nombres d'itérations pour une grille 16*16 : 5992 - 1108 - 1786 - 4304 - 2691
+
 Temps d'executions (en ms) : 159566 - 33083 - 49389 - 113593 - 81608
 
 Le temps observé est environ proportionnel au nombre d'itérations nécessaires.

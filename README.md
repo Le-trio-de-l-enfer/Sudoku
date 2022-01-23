@@ -18,7 +18,9 @@ Pour ce projet, nous avons commencer par lister l'ensemble des tâche à réalis
 
 ## Problemes rencontres
 A travers ce TP, nous avons rencontrer plusieurs problemes :
-  - 
+  - La majorite des grilles generer n'etait pas resolvable, elles suivaient bien les regles pour ne pas qu'il y ai deux fois le meme chiffre dans la meme ligne, dans la meme colonne et dans la meme case, mais bloquait a un moment car aucun chiffre ne pouvait etre place sur une case.
+  - Pour generer une grille, nous devons d'abord resoudre une grille vide, puis enlever un certains nombre de case suivant la difficulte demande.
+  - Pour la generation des grilles superieur a 25*25 cases, le temps de resolution de la grille vide prend un temps exponetielle suivant le nombre de case et peut prendre plusieurs minute. Cela vient sans-doute de notre facon d'avoir implementer l'algorithme.
 
 
 ## Rendu final

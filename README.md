@@ -24,4 +24,13 @@ A travers ce TP, nous avons rencontrer plusieurs problemes :
 
 
 ## Rendu final
+### Rendu d'un sudoku 9*9
+![alt text](https://github.com/Le-trio-de-l-enfer/Sudoku/blob/main/9.jpg?raw=true)
+
+### Rendu d'un sudoku 16*16
+![alt text](https://github.com/Le-trio-de-l-enfer/Sudoku/blob/main/16.jpg?raw=true)
+
+### Rendu d'un sudoku 25*25
+![alt text](https://github.com/Le-trio-de-l-enfer/Sudoku/blob/main/25.jpg?raw=true)
+
 

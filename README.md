@@ -8,7 +8,7 @@
 
 Sujet proposé par M. Ginhac (https://github.com/dginhac)
 
-## Introdution
+## Introduction
 Ce TP a pour but de générer des grilles de Sudoku de taille N avec 5 niveaux de difficulté. À l'aide d'un algorithme de "backtracking", nous devons résoudre ses différentes grilles de sudoku. Nous avons plutôt bien apprécié le premier TP que nous avons réalisé et nous aimons réaliser des défis, c'est pour cela que pour notre 2e TP, nous avons choisi le plus complexe.
 
 
